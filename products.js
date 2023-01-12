@@ -23,7 +23,7 @@ const app = {
                 console.log(err)
                 alert(err.response.data.message)
                 // 導入 login.html 頁面
-                // window.location = 'login.html';
+                window.location = 'login.html';
             })
         },
         getProductList() {
