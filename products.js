@@ -23,11 +23,11 @@ const app = {
     methods : {
         checkStatus() {
             axios.post(`${url}api/user/check`).then((res) => {
-                console.log(res);
+                // console.log(res);
                 this.getProductList();
             }).catch((err) => {
-                console.log(err)
-                alert(err.response.data.message)
+                console.log(err);
+                alert(err.response.data.message);
                 // 導入 login.html 頁面
                 window.location = 'login.html';
             })
@@ -35,9 +35,9 @@ const app = {
         getProductList() {
             axios.get(`${url}api/${path}/admin/products/all`).then((res) => {
                 this.products = res.data.products;
-                console.log(res);
+                // console.log(res);
             }).catch((err) => {
-                console.log(err)
+                console.log(err);
             })
         },
         openModal(status, product) {
@@ -52,11 +52,11 @@ const app = {
                 productModal.show();
                 this.isNew = false;
                 // 帶入當前要編輯的資料
-                this.tempProduct = {...product}
+                this.tempProduct = {...product};
 
             }else if (status === 'delete'){
                 delProductModal.show();
-                this.tempProduct = {...product}
+                this.tempProduct = {...product};
 
             }
         },
@@ -70,28 +70,32 @@ const app = {
             }
 
             axios[method](urlLink, { data: this.tempProduct} ).then(res => {
-                console.log(res);
+                // console.log(res);
                 this.getProductList();
                 productModal.hide();
+            }).catch(err => {
+                console.log(err);
             })
         },
         deleteProduct() {
             axios.delete(`${url}api/${path}/admin/product/${this.tempProduct.id}`).then(res => {
-                console.log(res);
+                // console.log(res);
                 this.getProductList();
                 delProductModal.hide();
+            }).catch(err => {
+                console.log(err);
             })
-        }
+        },
     },
     mounted() {
-        const token = document.cookie.replace(/(?:(?:^|.*;\s*)vue-Class\s*=\s*([^;]*).*$)|^.*$/, '$1');
+        const token = document.cookie.replace(/(?:(?:^|.*;\s*);vue-Class\s*=\s*([^;]*).*$)|^.*$/, '$1');
     axios.defaults.headers.common.Authorization = token;
         this.checkStatus();
         productModal = new bootstrap.Modal('#productModal');
-        delProductModal = new bootstrap.Modal('#delProductModal')
+        delProductModal = new bootstrap.Modal('#delProductModal');
     }
 
 }
 
 createApp(app)
-    .mount('#app')
+    .mount('#app');
