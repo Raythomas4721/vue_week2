@@ -20,9 +20,7 @@ const app = {
     methods : {
         signin() {
             axios.post(`${url}admin/signin`, this.user).then((res) => {
-                console.log(res.data.message)
                 const {token,expired} = res.data;
-                console.log(token,expired)
                 // 寫入 cookie token expired
                 document.cookie = `vue-Class = ${token}; expires = ${expired}`;
                 axios.defaults.headers.common['Authorization'] = token;
@@ -30,17 +28,6 @@ const app = {
                 window.location = 'products.html';
             }).catch((err) => {
                 console.log(err)
-            })
-        },
-        checkStatus() {
-            axios.post(`${url}api/user/check`).then((res) => {
-                console.log(res)
-                if(res.data.success) {
-                    alert('登入成功 ~')
-                }
-            }).catch((err) => {
-                console.log(err.response.data.message)
-                alert('登入失敗，請確認您的使用者帳號跟密碼 ~')
             })
         },
         getData() {
