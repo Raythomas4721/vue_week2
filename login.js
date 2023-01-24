@@ -36,7 +36,7 @@ const app = {
                 console.log(err)
             })
         }
-    },
+    }
 
 }
 
