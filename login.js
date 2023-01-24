@@ -23,7 +23,6 @@ const app = {
                 const {token,expired} = res.data;
                 // 寫入 cookie token expired
                 document.cookie = `vue-Class = ${token}; expires = ${expired}`;
-                axios.defaults.headers.common['Authorization'] = token;
                 // 導入 products.html 頁面
                 window.location = 'products.html';
             }).catch((err) => {
@@ -38,8 +37,6 @@ const app = {
             })
         }
     },
-    mounted() {
-    }
 
 }
 
